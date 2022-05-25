@@ -1,0 +1,128 @@
+Input:
+
+#All libraries have been imported to migrate and model my dataset moving forward.
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+
+data = pd.read_csv('Walmart Superstore.csv')
+data
+
+Output:
+
+  Store	    Date	       Weekly_Sales	   Temperature
+0	 1.0	   1/10/2010	  $1,453,329.50	    71.89
+1	 1.0	   2/7/2010	    $1,492,418.14	    80.91
+2	 1.0	   3/9/2010	    $1,540,163.53	    81.21
+3	 1.0	   3/12/2010	  $1,548,033.78	    49.27
+4	 1.0	   4/16/2010	  $1,466,058.28	    66.32
+...	...	...	...	...
+989	NaN	NaN	NaN	NaN
+990	NaN	NaN	NaN	NaN
+991	NaN	NaN	NaN	NaN
+992	NaN	NaN	NaN	NaN
+993	NaN	NaN	NaN	NaN
+
+Input:
+
+#This function drops all the null values in my dataset. 
+#So, as you can see my dataset went from "994 rows x 4 columns" to "100 rows x 4 columns"
+#A lot of unnecessary rows have been dropped. 
+
+data1 = data.dropna()
+data1
+
+Output:
+
+   Store	   Date	        Weekly_Sales	 Temperature
+0	  1.0	   1/10/2010	   $1,453,329.50	   71.89
+1	  1.0	   2/7/2010	     $1,492,418.14	   80.91
+2	  1.0	   3/9/2010	     $1,540,163.53	   81.21
+3	  1.0	   3/12/2010	   $1,548,033.78	   49.27
+4	  1.0	   4/16/2010	   $1,466,058.28	   66.32
+...	...	...	...	...
+95	1.0	   10/2/2012	  $1,802,477.43	     48.02
+96	1.0	   10/8/2012	  $1,592,409.97	     85.05
+97	1.0	   10/19/2012	  $1,508,068.77  	   67.97
+98	1.0	   11/5/2012	  $1,611,096.05	     73.77
+99	1.0	   12/10/2012	  $1,893,072.81  	   62.99
+
+Input:
+
+#This function describes my dataset by printing out aggregate functions.
+
+data1.describe()
+
+Output:
+
+	     Store	   Temperature
+count	  100.0	    100.000000
+mean	  1.0	      67.846300
+std	    0.0	      14.531087
+min	    1.0	      35.400000
+25%	    1.0	      58.502500
+50%	    1.0	      68.810000
+75%	    1.0	      80.595000
+max	    1.0	      91.650000
+
+Input:
+
+#This function prints out the first five rows of my dataset.
+
+data1.head()
+
+Output:
+
+   Store	 Date	         Weekly_Sales	   Temperature
+0	  1.0	   1/10/2010	   $1,453,329.50	   71.89
+1	  1.0	   2/7/2010	     $1,492,418.14     80.91
+2	  1.0	   3/9/2010	     $1,540,163.53	   81.21
+3	  1.0	   3/12/2010	   $1,548,033.78	   49.27
+4	  1.0	   4/16/2010	   $1,466,058.28	   66.32
+
+Input:
+
+#My dataset is modeled here by this function.
+
+# y = mx+c
+
+y = data1['Weekly_Sales']
+x1 = data1['Temperature']
+
+plt.scatter(x1,y)
+plt.xlabel('Temperature', fontsize = 20)
+plt.ylabel('Weekly_Sales', fontsize = 20)
+plt.show()
+
+Output:
+
+( Scatter plot appears plotting all of the records of the chart.)
+
+(Temperature is present on the x-axis and weekly_sales is present on the y-axis on the chart.)
+
+Input:
+
+# y = mx+c
+# y --> Dependent Variable
+# x --> Independent Variable
+
+x = sm.add_constant(x1)
+result = sm.OLS(y,x).fit()
+result.summary()
+
+[OLS Regression Results Spreadsheet printed]
+
+#After the sheet is printed out, this is the equation used to compute the simple linear regression of my variables above.
+#In this case, the variables would be "Temperature" and "Weekly_Sales".
+
+Output:
+
+OLS Regression Results Spreadsheet is present. You can take the coefficients from the OLS spreadsheet for both variables. (Temperature and Weekly_sales)
+
+Enter the coefficients into the simple linear regression equation below:
+
+  Weekly_sales = (coefficient) * Temperature + (coefficient)
+  
+  
